@@ -1,23 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-function SignIn() {
+function SignIn({ onLogin }) {
+  const [username, setUsername] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    })
+      .then((r) => r.json())
+      .then((user) => onLogin(user));
+  }
+
   return (
-    <div>
-      <h2>Sign In</h2>
-      <form>
-        <div>
-          <label>Email:</label>
-          <input type="email" />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" />
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
-      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button type="submit">Login</button>
+    </form>
   );
 }
 

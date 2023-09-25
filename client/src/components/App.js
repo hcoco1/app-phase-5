@@ -1,14 +1,16 @@
 import React from 'react';
 import { Routes } from 'react-router-dom';
 import routes from './routes';
+import NavigationBar from './NavigationBar'; // Import the NavigationBar component
 
 function App() {
   return (
     <div>
-      <h1>Note Taking App</h1>
+      <NavigationBar /> {/* Add the NavigationBar component here */}
       <Routes>{routes}</Routes>
     </div>
   );
 }
 
 export default App;
+
