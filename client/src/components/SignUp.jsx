@@ -37,21 +37,30 @@ const SignUp = () => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <label htmlFor="first_name">First Name</label>
-            <Field id="first_name" name="first_name" placeholder="Jane" />
+          <Form className="p-4">
+            <div className="mb-3">
+              <label htmlFor="first_name" className="form-label">First Name</label>
+              <Field id="first_name" name="first_name" placeholder="Jane" className="form-control" />
+            </div>
 
-            <label htmlFor="last_name">Last Name</label>
-            <Field id="last_name" name="last_name" placeholder="Doe" />
+            <div className="mb-3">
+              <label htmlFor="last_name" className="form-label">Last Name</label>
+              <Field id="last_name" name="last_name" placeholder="Doe" className="form-control" />
+            </div>
 
-            <label htmlFor="email">Email</label>
-            <Field id="email" name="email" placeholder="jane@acme.com" type="email" />
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <Field id="email" name="email" placeholder="jane@acme.com" type="email" className="form-control" />
+            </div>
 
-            <label htmlFor="password">Password</label>
-            <Field id="password" name="password" placeholder="Enter your password" type="password" />
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <Field id="password" name="password" placeholder="Enter your password" type="password" className="form-control" />
+            </div>
 
-            <button type="submit" disabled={isSubmitting}>Submit</button>
+            <button type="submit" className="btn btn-primary" disabled={isSubmitting}>Submit</button>
           </Form>
+
         )}
       </Formik>
     </div>

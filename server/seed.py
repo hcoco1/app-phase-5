@@ -10,8 +10,7 @@ from faker import Faker
 # Local imports
 from app import app
 from models import User, db
-
-
+from config import bcrypt
 
 
 fake = Faker()
@@ -22,7 +21,13 @@ def create_random_user():
     u.first_name = fake.first_name()
     u.last_name = fake.last_name()
     u.email = fake.email()
-    u._password_hash = fake.sha256()  # this is a simple fake hash of the password
+    
+    plain_password = fake.password()  # Generate a random password
+    u._password_hash = bcrypt.generate_password_hash(plain_password).decode('utf-8')
+    
+    # Print out the email and plain password for testing
+    print(f"Email: {u.email}, Password: {plain_password}")
+
     u.photo_url = fake.image_url()
     u.birth_date = fake.date_of_birth(minimum_age=18, maximum_age=80)
     u.join_date = fake.date_this_decade()
@@ -41,7 +46,7 @@ if __name__ == '__main__':
         print("Starting seed...")
         
         # Create 100 random users
-        for _ in range(100):
+        for _ in range(4):
             user = create_random_user()
             db.session.add(user)
         
@@ -49,4 +54,3 @@ if __name__ == '__main__':
         db.session.commit()
         
         print("Seeding completed!")
-

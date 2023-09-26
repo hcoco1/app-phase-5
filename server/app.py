@@ -61,8 +61,31 @@ class Signup(Resource):
             "birth_date": str(user.birth_date) if user.birth_date else None,
             "privacy_settings": user.privacy_settings
         }, 201
+        
+class SignIn(Resource):
+    def post(self):
+        json = request.get_json()
+
+        # Check if email and password are provided
+        if not json.get('email') or not json.get('password'):
+            return {"Message": "Email and password are required."}, 400
+
+        user = User.query.filter_by(email=json['email']).first()
+
+        # If user doesn't exist or password is wrong
+        if not user or not user.verify_password(json['password']):
+            return {"Message": "Invalid email or password."}, 401
+
+        # If user exists and password is correct
+        session['user_id'] = user.id
+        return {
+            "Message": "Logged in successfully.",
+            "id": user.id,
+            "email": user.email
+        }, 200
 
 # Adding the resource to the API
+api.add_resource(SignIn, '/signin', endpoint='signin')
 api.add_resource(Signup, '/signup', endpoint='signup')
 
 if __name__ == '__main__':
