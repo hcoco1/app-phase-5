@@ -8,7 +8,7 @@ function Home() {
             <header className="mb-4 text-center">
                 <h1>FamConnect</h1>
                 <p>Together, No Matter the Miles</p>
-                <button className="btn btn-primary">Sign in <i class="bi bi-person-fill"></i></button>
+                <button className="btn btn-primary">Sign in <i className="bi bi-person-fill"></i></button>
             </header>
 
             {/* Three Columns Features Section */}

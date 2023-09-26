@@ -30,12 +30,12 @@ function NavigationBar() {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/signin">Sign In   <i class="bi bi-person-fill"></i></Link>
+                            <Link className="nav-link" to="/signin">Sign In   <i className="bi bi-person-fill"></i></Link>
                            
 
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/signup">Sign Up   <i class="bi bi-person-plus-fill"></i></Link>
+                            <Link className="nav-link" to="/signup">Sign Up   <i className="bi bi-person-plus-fill"></i></Link>
                         </li>
                     </ul>
            

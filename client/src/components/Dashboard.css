@@ -1,0 +1,5 @@
+.card-img-top {
+    width: 100%;      /* This will make the image take the full width of the card */
+    max-height: 250px;  /* This will limit the height of the image */
+    object-fit: cover; /* This will ensure the image covers the area without distortion */
+}

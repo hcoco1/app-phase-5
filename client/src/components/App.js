@@ -1,14 +1,15 @@
 import React from 'react';
 import { Routes } from 'react-router-dom';
 import routes from './routes';
-import NavigationBar from './NavigationBar'; // Import the NavigationBar component
+import NavigationBar from './NavigationBar'; 
+
 
 function App() {
   return (
     <div>
-      <NavigationBar /> {/* Add the NavigationBar component here */}
+      <NavigationBar />
       <Routes>{routes}</Routes>
-    </div>
+     </div>
   );
 }
 
