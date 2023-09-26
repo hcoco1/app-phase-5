@@ -49,7 +49,7 @@ const SignUp = () => {
           }
 
           setStatus('Signup successful! Please check your email for confirmation.');
-          navigate('/dashboard');
+          navigate('/users');
         } catch (error) {
           setStatus('Network error. Please try again later.');
         }

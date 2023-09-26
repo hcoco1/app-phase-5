@@ -34,7 +34,7 @@ const SignIn = () => {
 
                     setStatus('Sign in successful! Redirecting...');
                     // Here, you can handle the server response, e.g., save the user data, redirect, etc.
-                    navigate('/dashboard');
+                    navigate('/users');
                 } catch (error) {
                     setStatus('Network error. Please try again later.');
                 }

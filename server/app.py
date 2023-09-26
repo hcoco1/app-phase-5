@@ -150,11 +150,38 @@ class UserList(Resource):
             "birth_date": str(user.birth_date) if user.birth_date else None,
             "privacy_settings": user.privacy_settings
         } for user in users], 200
+        
+class UserDetail(Resource):
+    def get(self, user_id):
+        """
+        Endpoint to get a user by ID
+        """
+
+        # Get the user from the database by ID
+        user = User.query.filter(User.id == user_id).first()
+
+        # If user is found, return the user's details with a 200 OK status
+        if user:
+            return {
+                "id": user.id,
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "email": user.email,
+                "photo_url": user.photo_url,
+                "birth_date": str(user.birth_date) if user.birth_date else None,
+                "privacy_settings": user.privacy_settings
+            }, 200
+        
+        # If no user is found, return a message with a 404 status
+        return {"Message": "User not found"}, 404
+    
+    
 
         
 
 
 # Adding the resources to the API
+api.add_resource(UserDetail, '/users/<int:user_id>')
 api.add_resource(UserList, '/users')
 api.add_resource(CheckSession, '/check_session')
 api.add_resource(SignOut, '/sign_out')
