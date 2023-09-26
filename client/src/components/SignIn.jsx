@@ -13,7 +13,7 @@ const SignIn = () => {
                 email: Yup.string().email('Invalid email address').required('Required'),
                 password: Yup.string().min(8, 'Must be 8 characters or more').required('Required'),
             })}
-            onSubmit={async values => {
+            onSubmit={async (values, { setStatus }) => {
                 try {
                     const response = await fetch('/signin', {
                         method: 'POST',
@@ -23,15 +23,17 @@ const SignIn = () => {
                         body: JSON.stringify(values)
                     });
 
+                    const data = await response.json();
+
                     if (!response.ok) {
-                        console.error('Server Error:', response.statusText);
+                        setStatus(data.message || 'An error occurred during sign in.');
                         return;
                     }
 
-                    const data = await response.json();
-                    console.log('Server Response:', data);
+                    setStatus('Sign in successful! Redirecting...');
+                    // Here, you can handle the server response, e.g., save the user data, redirect, etc.
                 } catch (error) {
-                    console.error('Network Error:', error.message);
+                    setStatus('Network error. Please try again later.');
                 }
             }}
         >
@@ -54,6 +56,7 @@ const SignIn = () => {
                     </div>
 
                     <button type="submit" className="btn btn-primary">Sign In</button>
+                    {formik.status && <div className="mt-3 alert alert-info">{formik.status}</div>}
                 </Form>
             )}
         </Formik>
