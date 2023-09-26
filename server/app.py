@@ -83,8 +83,47 @@ class SignIn(Resource):
             "id": user.id,
             "email": user.email
         }, 200
+        
+
+        
+        
+# Define a resource to check the session for the logged-in user's details
+class CheckSession(Resource):
+    def get(self):
+        # Get the user from the database using the user ID in the session
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        
+        if user:
+            # If user is found, return the user's details with a 200 OK status
+            return {
+                "id" : user.id,
+                "first_name" : user.first_name,
+                "photo_url" : user.photo_url,
+                "privacy_settings" : user.privacy_settings
+            }, 200
+        else:
+            # If no user is found, return an unauthorized message with a 401 status
+            return {"Message": "Unauthorized"}, 401      
+        
+        
+class SignOut(Resource):
+    def delete(self):
+        # Check if a user is logged in and then log them out
+        if session.get("user_id"):
+            session['user_id'] = None
+            return {}, 204
+
+        # If no user is logged in, return an unauthorized message with a 401 status
+        return {"message": "unauthorized"}, 401
+
+
+
+
+
 
 # Adding the resource to the API
+api.add_resource(CheckSession, '/check_session')
+api.add_resource(SignOut, '/sign_out')
 api.add_resource(SignIn, '/signin', endpoint='signin')
 api.add_resource(Signup, '/signup', endpoint='signup')
 
