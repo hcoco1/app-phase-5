@@ -42,6 +42,7 @@ function Dashboard({  searchQuery = ""  }) {
 
 
     useEffect(() => {
+        
         async function fetchData() {
             try {
                 const response = await fetch('http://127.0.0.1:5000/users');
@@ -69,6 +70,8 @@ function Dashboard({  searchQuery = ""  }) {
 
         fetchData();
     }, []);
+
+    console.log("Dashboard is being rendered");
 
     if (isLoading) {
         return <p>Loading...</p>;

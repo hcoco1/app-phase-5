@@ -1,17 +1,17 @@
+// src/index.js
 import React from 'react';
-// eslint-disable-next-line
-import ReactDOM, { createRoot } from 'react-dom/client'; 
+import { createRoot } from 'react-dom/client'; 
+import { Provider } from 'react-redux';
+import store from './app/store';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
-
-// Use the new ReactDOM.createRoot API
 const root = document.getElementById('root');
 const reactRoot = createRoot(root);
 
 reactRoot.render(
-
+  <Provider store={store}>
     <App />
-  
+  </Provider>
 );

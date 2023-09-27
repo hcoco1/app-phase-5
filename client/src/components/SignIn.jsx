@@ -2,11 +2,19 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/counter/auth/authSlice';
+
+
+
+
 
 
 const SignIn = () => {
-    
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     return (
         <Formik
@@ -29,16 +37,22 @@ const SignIn = () => {
                     });
 
                     const data = await response.json();
+                    console.log(data)
 
                     if (!response.ok) {
                         setStatus(data.message || 'An error occurred during sign in.');
                         return;
                     }
 
+
+                    // ... inside the onSubmit function, after checking response.ok
                     setStatus('Sign in successful! Redirecting...');
-                    // Update the user's authentication status
+                    console.log("About to dispatch login action");
+                    dispatch(login(data.user));
+                    console.log("Login action dispatched");
                     
                     navigate('/users');
+
                 } catch (error) {
                     setStatus('Network error. Please try again later.');
                 }
