@@ -9,6 +9,7 @@ import Home from './Home';
 
 
 
+
 const routes = [
   {
     path: "/",
@@ -27,29 +28,32 @@ const routes = [
   },
   {
     path: "/users",
-    main: () => <DashBoard />,
-    sidebar: () => <div>DashBoard!</div>
+    main: () => <div></div>,
+    sidebar: () => <DashBoard />
   },
   {
-    path: "users/:id",
+    path: "/users/:id",
     main: DashDetail,
-    sidebar: () =>  <div>DashDetail</div>
+    sidebar: () => <div>DashDetail</div>
   }
-  
 ];
 
 
 
 
 
+
 function App() {
+  
   return (
     <Router>
       <Navbar />
       <div style={{ display: "flex" }}>
-        <div className="sidebar" style={{ padding: "10px", width: "40%", background: "#f0f0f0" }}>
-          <DashBoard />
+        
+        <div className="sidebar" style={{ padding: "10px", width: "40%", background: "#f0f0f0", overflowY: 'auto', maxHeight: '100vh' }}>
+        <DashBoard  />
         </div>
+
         <div className="main-content" style={{ flex: 1, padding: "10px" }}>
           <Routes>
             {routes.map((route, index) => (

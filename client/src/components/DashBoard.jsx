@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 
 
 
+
 function UserCard({ user }) {
     return (
         <Link to={`/users/${user.id}`}>
@@ -27,10 +28,11 @@ function UserCard({ user }) {
 }
 
 
-function Dashboard() {
+function Dashboard({  searchQuery = ""  }) {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -42,6 +44,14 @@ function Dashboard() {
                 }
 
                 const data = await response.json();
+
+                // Check for incomplete user data after populating the array
+                data.forEach(user => {
+                    if (!user.first_name || !user.last_name || !user.email) {
+                        console.error('Incomplete user data:', user);
+                    }
+                });
+
                 setUsers(data);
             } catch (err) {
                 setError(err);
@@ -61,9 +71,14 @@ function Dashboard() {
         return <p>Error loading data: {error.message}</p>;
     }
 
+
+    
+
     return (
         <div className="d-flex align-items-center"> 
             <Container>
+
+        
                 <Row className="justify-content-center">
                     {users.map(user => (
                         <Col xs={12} md={12} key={user.id} className="mb-3 d-flex justify-content-center">
