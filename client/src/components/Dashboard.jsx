@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 
 function UserCard({ user }) {
     return (
-        <div key={user.id} className="col-12 col-md-6 mb-3">
-            <Link to={`/users/${user.id}`}>
-                <div className="card w-100">
-                    <img
-                        src={user.photo_url || "default_image_url.jpg"}
-                        className="card-img-top img-fluid p-3"
-                        alt={`${user.first_name} ${user.last_name}`}
-                    />
-                    <div className="card-body">
-                        <p className="card-subtitle mb-2 text-body-secondary text-end">{user.privacy_settings}</p>
-                        <h5 className="card-title">{`${user.first_name} ${user.last_name}`}</h5>
-                        <p className="card-subtitle mb-2 text-body-secondary text-start">{user.birth_date}</p>
-                        <p className="card-text">{user.email}</p>
-                        {/* Placeholder content below */}
-                        <p className="card-text">User Intro Placeholder</p>
-                        <h6 className="card-subtitle mb-2 text-body-secondary">User Role Placeholder</h6>
-                        <a href="/" className="btn btn-primary" target="_blank" rel="noopener noreferrer">View Profile</a>
-                    </div>
-                </div>
-            </Link>
-        </div>
+        <Link to={`/users/${user.id}`}>
+            <Card style={{ width: '17rem' }}>
+                <Card.Img 
+                variant="top" 
+                src={user.photo_url || "default_image_url.jpg"} 
+                style={{ width: '100px', height: '100px', padding: '5px' }} />
+                <Card.Body>
+                    <Card.Title>{`${user.first_name} ${user.last_name}`}</Card.Title>
+                    <Card.Text>
+                        {user.email}
+                    </Card.Text>
+                                    </Card.Body>
+            </Card>
+        </Link>
     );
 }
 
@@ -38,11 +36,11 @@ function Dashboard() {
         async function fetchData() {
             try {
                 const response = await fetch('http://127.0.0.1:5000/users');
-                
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                
+
                 const data = await response.json();
                 setUsers(data);
             } catch (err) {
@@ -64,16 +62,19 @@ function Dashboard() {
     }
 
     return (
-        <div className="container">
-            <div className="row">
-{users.map(user => <UserCard key={user.id} user={user} />)}
-
-            </div>
-
-
-            
+        <div className="d-flex align-items-center"> 
+            <Container>
+                <Row className="justify-content-center">
+                    {users.map(user => (
+                        <Col xs={12} md={4} key={user.id} className="mb-3 d-flex justify-content-center">
+                            <UserCard user={user} style={{ width: '100%' }}/>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </div>
     );
+    
 }
 
 export default Dashboard;

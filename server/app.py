@@ -190,4 +190,4 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 
 # Start the Flask application
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5555, debug=True)

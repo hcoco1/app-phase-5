@@ -51,7 +51,7 @@ if __name__ == '__main__':
         print("Starting seed...")
         
         # Create 100 random users
-        for _ in range(4):
+        for _ in range(50):
             user = create_random_user()
             db.session.add(user)
         

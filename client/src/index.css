@@ -1,9 +1,35 @@
 
+
 :root {
   --bg: #282c34;
   --header: #fff;
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
+}
+
+
+.nestedNavLink {
+  color: red;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.nestedNavLink:hover {
+  background-color: #f5f5f5;
+}
+
+.navLinks {
+  color: rgb(7, 125, 237);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.navLinks:hover {
+  background-color: #f5f5f5;
 }
 
 
