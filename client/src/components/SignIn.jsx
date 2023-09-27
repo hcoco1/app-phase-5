@@ -3,8 +3,11 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
+
 const SignIn = () => {
+    
     const navigate = useNavigate();
+
     return (
         <Formik
             initialValues={{
@@ -33,7 +36,8 @@ const SignIn = () => {
                     }
 
                     setStatus('Sign in successful! Redirecting...');
-                    // Here, you can handle the server response, e.g., save the user data, redirect, etc.
+                    // Update the user's authentication status
+                    
                     navigate('/users');
                 } catch (error) {
                     setStatus('Network error. Please try again later.');
@@ -67,4 +71,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-

@@ -6,25 +6,21 @@ import SignIn from './SignIn';
 import Navbar from './Navbar';
 import Home from './Home';
 
-
-
-
-
 const routes = [
   {
     path: "/",
     main: () => <Home />,
-    sidebar: () => <div>home!</div>
+   
   },
   {
     path: "/signup",
     main: () => <SignUp />,
-    sidebar: () => <div>Sign Up!</div>
+    
   },
   {
     path: "/signin",
     main: () => <SignIn />,
-    sidebar: () => <div>Sign In!</div>
+    
   },
   {
     path: "/users",
@@ -38,11 +34,6 @@ const routes = [
   }
 ];
 
-
-
-
-
-
 function App() {
   
   return (
@@ -50,7 +41,7 @@ function App() {
       <Navbar />
       <div style={{ display: "flex" }}>
         
-        <div className="sidebar" style={{ padding: "10px", width: "40%", background: "#f0f0f0", overflowY: 'auto', maxHeight: '100vh' }}>
+        <div className="sidebar" style={{ padding: "10px", width: "30%", background: "#f0f0f0", overflowY: 'auto', maxHeight: '100vh' }}>
         <DashBoard  />
         </div>
 
@@ -67,10 +58,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-

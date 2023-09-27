@@ -3,8 +3,12 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const SignUp = () => {
   const navigate = useNavigate();
+
+
   return (
     <Formik
       initialValues={{
@@ -49,6 +53,7 @@ const SignUp = () => {
           }
 
           setStatus('Signup successful! Please check your email for confirmation.');
+       
           navigate('/users');
         } catch (error) {
           setStatus('Network error. Please try again later.');

@@ -12,7 +12,7 @@ function Navbar() {
         <Link to="/" style={{ margin: "0 20px" }}>Home</Link>
         <Link to="/signup" style={{ margin: "0 20px" }}>Sign Up</Link>
         <Link to="/signin" style={{ margin: "0 20px" }}>Sign In</Link>
-        <Link to="/users" className="mobile-only" style={{ margin: "0 20px" }}>All Users</Link>
+        <Link to="/">All Users</Link>
       </div>
     </div>
   );

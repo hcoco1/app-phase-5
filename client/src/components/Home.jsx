@@ -1,46 +1,72 @@
-import React from 'react';
 
-function Home() {
+
+function NoTransitionExample() {
     return (
-        <div className="container mt-5">
 
-            {/* Hero Section */}
-            <header className="mb-4 text-center">
-                <h1>FamConnect</h1>
-                <p>Together, No Matter the Miles</p>
-                <button className="btn btn-primary">Sign in <i className="bi bi-person-fill"></i></button>
-            </header>
-
-            {/* Three Columns Features Section */}
-            <section className="row mb-4">
-                <div className="col-md-4">
-                    <h2>Feature 1</h2>
-                    <p>Some description about this feature.</p>
+        <> <h2 style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif', textAlign: 'center' }}><strong>F</strong>am<strong>C</strong>onnect</h2>
+        <p style={{ fontSize: '16px', fontFamily: 'Helvetica, sans-serif', textAlign: 'center' }}>Together, No Matter the Miles</p>
+        
+        
+            <div id="carouselExample" className="carousel slide">
+                <div className="carousel-inner">
+                    <div className="carousel-item active">
+                        <img src="/hana.jpg" className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="/josue.jpg" className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src="/luana.jpg" className="d-block w-100" alt="..." />
+                    </div>
                 </div>
-                <div className="col-md-4">
-                    <h2>Feature 2</h2>
-                    <p>Some description about this feature.</p>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+
+
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Accordion Item #1
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                    </div>
                 </div>
-                <div className="col-md-4">
-                    <h2>Feature 3</h2>
-                    <p>Some description about this feature.</p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Accordion Item #2
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                    </div>
                 </div>
-            </section>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                    </div>
+                </div>
+            </div>
 
-            {/* Full-width Call-to-action */}
-            <section className="bg-light p-4 rounded mb-4">
-                <h2>Join us now!</h2>
-                <p>Don't miss out on our special offers for new members. Register today.</p>
-                <button className="btn btn-success">Sign Up</button>
-            </section>
+        </>
 
-            {/* Footer */}
-            <footer>
-                <p>&copy; 2023 My Website. All rights reserved.</p>
-            </footer>
 
-        </div>
     );
 }
 
-export default Home;
+export default NoTransitionExample;

@@ -38,15 +38,13 @@
 }
 
 .user-card {
-  width: 17rem;  /* This is the default width for larger screens */
+  width: 13rem;  /* This is the default width for larger screens */
 }
 
 
 /* Add this in your CSS or stylesheet file */
 @media (max-width: 768px) {  /* adjust 768px based on when you want to trigger the change */
-  .sidebar {
-    display: none;
-  }
+
   .main-content {
     width: 100%;
     flex: none; /* This overrides the flex: 1 property on smaller screens */
@@ -55,7 +53,17 @@
     display: inline;
   }
   .user-card {
-    width: 20rem;  /* Adjusted width for smaller screens */
+    width: 6rem;  /* Adjusted width for smaller screens */
+  }
+  .user-card .card-title {
+    font-size: 14px; /* Adjust the font size for the card title */
+  }
+
+  .user-card .card-text {
+    font-size: 12px; /* Adjust the font size for the card text */
+  }
+  .sidebar{
+    width: 20%;
   }
 }  
 

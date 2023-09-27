@@ -11,17 +11,24 @@ import Col from 'react-bootstrap/Col';
 function UserCard({ user }) {
     return (
         <Link to={`/users/${user.id}`}>
-            <Card className="user-card" >
-                <Card.Img 
-                variant="top" 
-                src={user.photo_url || "default_image_url.jpg"} 
-                style={{ width: '100px', height: '100px', padding: '5px' }} />
-                <Card.Body>
+            <Card className="user-card">
+                <Container>
+                    <Row className="justify-content-center">
+                        <Col xs="auto">
+                            <Card.Img 
+                                variant="top" 
+                                src={user.photo_url || "default_image_url.jpg"} 
+                                style={{ width: '80px', height: '80px', padding: '5px' }} 
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+                <Card.Body className="text-center">
                     <Card.Title>{`${user.first_name} ${user.last_name}`}</Card.Title>
                     <Card.Text>
-                        {user.email}
+                        
                     </Card.Text>
-                                    </Card.Body>
+                </Card.Body>
             </Card>
         </Link>
     );
