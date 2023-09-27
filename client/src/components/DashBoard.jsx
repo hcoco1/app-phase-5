@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 function UserCard({ user }) {
     return (
         <Link to={`/users/${user.id}`}>
-            <Card style={{ width: '17rem' }}>
+            <Card className="user-card" >
                 <Card.Img 
                 variant="top" 
                 src={user.photo_url || "default_image_url.jpg"} 
@@ -66,15 +66,14 @@ function Dashboard() {
             <Container>
                 <Row className="justify-content-center">
                     {users.map(user => (
-                        <Col xs={12} md={4} key={user.id} className="mb-3 d-flex justify-content-center">
-                            <UserCard user={user} style={{ width: '100%' }}/>
+                        <Col xs={12} md={12} key={user.id} className="mb-3 d-flex justify-content-center">
+                            <UserCard user={user} style={{ width: '90%' }}/>
                         </Col>
                     ))}
                 </Row>
             </Container>
         </div>
     );
-    
 }
 
 export default Dashboard;

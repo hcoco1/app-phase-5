@@ -32,5 +32,32 @@
   background-color: #f5f5f5;
 }
 
+/* By default, hide the mobile-only links */
+.mobile-only {
+  display: none;
+}
+
+.user-card {
+  width: 17rem;  /* This is the default width for larger screens */
+}
+
+
+/* Add this in your CSS or stylesheet file */
+@media (max-width: 768px) {  /* adjust 768px based on when you want to trigger the change */
+  .sidebar {
+    display: none;
+  }
+  .main-content {
+    width: 100%;
+    flex: none; /* This overrides the flex: 1 property on smaller screens */
+  }
+  .mobile-only {
+    display: inline;
+  }
+  .user-card {
+    width: 20rem;  /* Adjusted width for smaller screens */
+  }
+}  
+
 
 
