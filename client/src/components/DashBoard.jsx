@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUsers, setStatus, setError} from '../features/users/usersSlice';
 
 
 
@@ -15,10 +17,10 @@ function UserCard({ user }) {
                 <Container>
                     <Row className="justify-content-center">
                         <Col xs="auto">
-                            <Card.Img 
-                                variant="top" 
-                                src={user.photo_url || "default_image_url.jpg"} 
-                                style={{ width: '80px', height: '80px', padding: '5px' }} 
+                            <Card.Img
+                                variant="top"
+                                src={user.photo_url || "default_image_url.jpg"}
+                                style={{ width: '80px', height: '80px', padding: '5px' }}
                             />
                         </Col>
                     </Row>
@@ -26,7 +28,7 @@ function UserCard({ user }) {
                 <Card.Body className="text-center">
                     <Card.Title>{`${user.first_name} ${user.last_name}`}</Card.Title>
                     <Card.Text>
-                        
+
                     </Card.Text>
                 </Card.Body>
             </Card>
@@ -35,64 +37,47 @@ function UserCard({ user }) {
 }
 
 
-function Dashboard({  searchQuery = ""  }) {
-    const [users, setUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+function Dashboard({ searchQuery = "" }) {
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users.list);
 
+    const status = useSelector(state => state.users.status);
+    const error = useSelector(state => state.users.error);
 
     useEffect(() => {
-        
         async function fetchData() {
+            dispatch(setStatus('loading'));
             try {
-                const response = await fetch('http://127.0.0.1:5000/users');
-
+                const response = await fetch('http://127.0.0.1:5555/users');
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Oops, something went wrong! Please try again later.'); // User-friendly error message
                 }
-
                 const data = await response.json();
-
-                // Check for incomplete user data after populating the array
-                data.forEach(user => {
-                    if (!user.first_name || !user.last_name || !user.email) {
-                        console.error('Incomplete user data:', user);
-                    }
-                });
-
-                setUsers(data);
+                dispatch(setUsers(data));
+                dispatch(setStatus('succeeded'));
             } catch (err) {
-                setError(err);
-            } finally {
-                setIsLoading(false);
+                dispatch(setError(err.toString()));
+                dispatch(setStatus('failed'));
             }
         }
-
         fetchData();
-    }, []);
+    }, [dispatch]);
 
-    console.log("Dashboard is being rendered");
-
-    if (isLoading) {
+    if (status === 'loading') {
         return <p>Loading...</p>;
     }
 
-    if (error) {
-        return <p>Error loading data: {error.message}</p>;
+    if (status === 'failed') {
+        return <p>Error loading data: {error}</p>;
     }
 
-
-    
-
     return (
-        <div className="d-flex align-items-center"> 
+        <div className="d-flex align-items-center">
             <Container>
-
-        
                 <Row className="justify-content-center">
                     {users.map(user => (
                         <Col xs={12} md={12} key={user.id} className="mb-3 d-flex justify-content-center">
-                            <UserCard user={user} style={{ width: '90%' }}/>
+                            <UserCard user={user} />
                         </Col>
                     ))}
                 </Row>

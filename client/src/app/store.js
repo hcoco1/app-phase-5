@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/counter/auth/authSlice'; // Adjust the path to point to your authSlice.js
+import usersReducer from '../features/users/usersSlice';
 
 
 
@@ -9,7 +10,8 @@ import authReducer from '../features/counter/auth/authSlice'; // Adjust the path
 const store = configureStore({
   reducer: {
     counter: counterReducer,
-    auth: authReducer // Add this line
+    auth: authReducer,
+    users: usersReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });

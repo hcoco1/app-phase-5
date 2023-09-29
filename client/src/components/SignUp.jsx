@@ -15,6 +15,9 @@ const SignUp = () => {
         first_name: '',
         last_name: '',
         email: '',
+        address: '',
+        biography: '',
+        hobbies: '',
         photo_url: '',
         birth_date: '',
         privacy_settings: '',
@@ -25,6 +28,9 @@ const SignUp = () => {
         first_name: Yup.string().max(50, 'Must be 50 characters or less').required('Required'),
         last_name: Yup.string().max(50, 'Must be 50 characters or less').required('Required'),
         email: Yup.string().email('Invalid email address').max(100, 'Must be 100 characters or less').required('Required'),
+        address: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
+        biography: Yup.string().max(500, 'Must be 500 characters or less').required('Required'),
+        hobbies: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
         photo_url: Yup.string().url('Invalid URL').max(512, 'Must be 512 characters or less').required('Required'),
         birth_date: Yup.date().required('Required'),
         privacy_settings: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
@@ -75,6 +81,21 @@ const SignUp = () => {
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email</label>
             <Field id="email" name="email" type="email" className="form-control" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <Field id="address" name="address" type="text" className="form-control" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="biography" className="form-label">Biography</label>
+            <Field id="biography" name="biography" type="text" className="form-control" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="hobbies" className="form-label">Hobbies</label>
+            <Field id="hobbies" name="hobbies" type="text" className="form-control" />
           </div>
 
           <div className="mb-3">

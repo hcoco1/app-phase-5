@@ -5,17 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/counter/auth/authSlice';
 
-
-
-
-
-
 const SignIn = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-
     return (
         <Formik
             initialValues={{
@@ -28,6 +20,7 @@ const SignIn = () => {
             })}
             onSubmit={async (values, { setStatus }) => {
                 try {
+                    // Login Logic
                     const response = await fetch('/signin', {
                         method: 'POST',
                         headers: {
@@ -35,28 +28,35 @@ const SignIn = () => {
                         },
                         body: JSON.stringify(values)
                     });
-
+            
                     const data = await response.json();
-                    console.log(data)
-
+            
                     if (!response.ok) {
                         setStatus(data.message || 'An error occurred during sign in.');
                         return;
                     }
-
-
-                    // ... inside the onSubmit function, after checking response.ok
-                    setStatus('Sign in successful! Redirecting...');
-                    console.log("About to dispatch login action");
-                    dispatch(login(data.user));
-                    console.log("Login action dispatched");
+            
+                    // Fetch user details based on the user ID received from login.
+                    const userDetailsResponse = await fetch(`/users/${data.id}`);
                     
+                    // Check for errors in the userDetailsResponse too
+                    if (!userDetailsResponse.ok) {
+                        const errorData = await userDetailsResponse.json();
+                        setStatus(errorData.Message || 'An error occurred fetching user details.');
+                        return;
+                    }
+                    
+                    const userDetails = await userDetailsResponse.json();
+                    
+                    // Dispatch the userDetails to the Redux store
+                    dispatch(login(userDetails));
+            
                     navigate('/users');
-
                 } catch (error) {
                     setStatus('Network error. Please try again later.');
                 }
             }}
+            
         >
             {formik => (
                 <Form className="p-4">

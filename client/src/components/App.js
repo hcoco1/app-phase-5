@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect } from 'react';
 import DashBoard from './DashBoard';
 import DashDetail from './DashDetail';
 import SignUp from './SignUp';
@@ -6,6 +7,8 @@ import SignIn from './SignIn';
 import Navbar from './Navbar';
 import Home from './Home';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { checkSession } from '../features/counter/auth/authSlice';
 
 
 
@@ -35,7 +38,12 @@ const routes = [
 ];
 
 function App() {
-  console.log("App component rendered");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check if user has an active session on initial app load
+    dispatch(checkSession());
+  }, [dispatch]); 
 
 
 

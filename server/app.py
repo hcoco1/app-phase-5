@@ -11,6 +11,13 @@ from sqlalchemy.exc import IntegrityError
 # Secret key for Flask application (note: in a real-world application, this should be stored securely)
 app.secret_key = 'Ivan-743089723098475r2prwfhlsdnflsdf'
 
+class Home(Resource):
+    def get(self):
+        return {"message": "Welcome to the server home page!"}
+
+api.add_resource(Home, '/')
+
+
 class Signup(Resource):
     def post(self):
         """
@@ -40,6 +47,9 @@ class Signup(Resource):
             first_name=json['first_name'],
             last_name=json['last_name'],
             email=json['email'],
+            address=json['address'],
+            biography=json['biography'],
+            hobbies=json['hobbies'],
             photo_url=json.get('photo_url', None),
             birth_date=birth_date,
             privacy_settings=json.get('privacy_settings', None)
@@ -63,6 +73,9 @@ class Signup(Resource):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "email": user.email,
+            "address": user.address,
+            "biography": user.biography,
+            "hobbies": user.hobbies,
             "photo_url": user.photo_url,
             "birth_date": str(user.birth_date) if user.birth_date else None,
             "privacy_settings": user.privacy_settings
@@ -146,6 +159,9 @@ class UserList(Resource):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "email": user.email,
+            "address": user.address,
+            "biography": user.biography,
+            "hobbies": user.hobbies,
             "photo_url": user.photo_url,
             "birth_date": str(user.birth_date) if user.birth_date else None,
             "privacy_settings": user.privacy_settings
@@ -167,6 +183,9 @@ class UserDetail(Resource):
                 "first_name": user.first_name,
                 "last_name": user.last_name,
                 "email": user.email,
+                "address": user.address,
+                "biography": user.biography,
+                "hobbies": user.hobbies,
                 "photo_url": user.photo_url,
                 "birth_date": str(user.birth_date) if user.birth_date else None,
                 "privacy_settings": user.privacy_settings
@@ -174,6 +193,41 @@ class UserDetail(Resource):
         
         # If no user is found, return a message with a 404 status
         return {"Message": "User not found"}, 404
+    
+    def patch(self, user_id):
+        """
+        Endpoint to partially edit a user by ID using PATCH
+        """
+        user = User.query.filter(User.id == user_id).first()
+        if not user:
+            return {"Message": "User not found"}, 404
+
+        data = request.json
+
+        # Loop through provided data and update the corresponding attributes of the user
+        for attr, value in data.items():
+            setattr(user, attr, value)
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        return {"Message": "User updated successfully"}, 200
+    
+
+
+    def delete(self, user_id):
+        """
+        Endpoint to delete a user by ID
+        """
+        user = User.query.filter(User.id == user_id).first()
+        if not user:
+            return {"Message": "User not found"}, 404
+
+        # Delete the user from the database
+        db.session.delete(user)
+        db.session.commit()
+        return {"Message": "User deleted successfully"}, 200
+
     
     
 
@@ -187,6 +241,7 @@ api.add_resource(CheckSession, '/check_session')
 api.add_resource(SignOut, '/sign_out')
 api.add_resource(SignIn, '/signin', endpoint='signin')
 api.add_resource(Signup, '/signup', endpoint='signup')
+
 
 # Start the Flask application
 if __name__ == '__main__':
